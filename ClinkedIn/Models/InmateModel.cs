@@ -11,7 +11,7 @@ namespace ClinkedIn.Models
         public string Name { get; set; }
         public string Conviction { get; set; }
         public List<string> Friends { get; set; }
-        public Dictionary<string, double> Interests { get; set; }
-        public Services Services { get; set; }
+        public Interests Interests { get; set; }
+        public ServiceModel Services { get; set; }
     }
 }
