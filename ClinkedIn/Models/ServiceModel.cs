@@ -8,6 +8,6 @@ namespace ClinkedIn.Models
 {
     public class ServiceModel
     {
-        public Dictionary<string, double> Name_Cost { get; set; }
+        public Dictionary<string, double> Services { get; set; }
     }
 }
