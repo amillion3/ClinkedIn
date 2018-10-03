@@ -29,7 +29,43 @@ namespace ClinkedIn.Controllers
                 new Inmate {Id = 9, Name = "Michael Grimm", Conviction = "Pleaded guilty of felony tax evasion.", Friends = new List<Inmate>(), Enemies = new List<Inmate>(), Services = new Dictionary<string, double>()}
             };
 
-            Inmates[0].Services.Add("shivdisposal", 5.00);
+            Inmates[0].Services.Add("Shiv disposal", 5.00);
+            Inmates[1].Services.Add("Enforcer", 20.00);
+            Inmates[2].Services.Add("Contraband Dealer", 10.00);
+            Inmates[3].Services.Add("Stylist", 3.00);
+            Inmates[4].Services.Add("Librarian", 2.00);
+            Inmates[5].Services.Add("Cafeteria Worker", 4.00);
+            Inmates[6].Services.Add("Laundry", 1.00);
+            Inmates[7].Services.Add("Tattoo Artist", 8.00);
+            Inmates[8].Services.Add("Hooch Man", 9.00);
+
+            Inmates[0].Interests.Add(Interests.Romance);
+            Inmates[0].Interests.Add(Interests.Reading);
+            Inmates[0].Interests.Add(Interests.Democrat);
+            Inmates[1].Interests.Add(Interests.Reading);
+            Inmates[1].Interests.Add(Interests.Contraband);
+            Inmates[1].Interests.Add(Interests.Democrat);
+            Inmates[2].Interests.Add(Interests.Pruno);
+            Inmates[2].Interests.Add(Interests.Gambling);
+            Inmates[2].Interests.Add(Interests.Republican);
+            Inmates[3].Interests.Add(Interests.Sports);
+            Inmates[3].Interests.Add(Interests.Contraband);
+            Inmates[3].Interests.Add(Interests.Republican);
+            Inmates[4].Interests.Add(Interests.Contraband);
+            Inmates[4].Interests.Add(Interests.Pruno);
+            Inmates[4].Interests.Add(Interests.Republican);
+            Inmates[5].Interests.Add(Interests.Gambling);
+            Inmates[5].Interests.Add(Interests.Romance);
+            Inmates[5].Interests.Add(Interests.Republican);
+            Inmates[6].Interests.Add(Interests.Reading);
+            Inmates[6].Interests.Add(Interests.Sports);
+            Inmates[6].Interests.Add(Interests.Democrat);
+            Inmates[7].Interests.Add(Interests.Contraband);
+            Inmates[7].Interests.Add(Interests.Romance);
+            Inmates[7].Interests.Add(Interests.Democrat);
+            Inmates[8].Interests.Add(Interests.Reading);
+            Inmates[8].Interests.Add(Interests.Pruno);
+            Inmates[8].Interests.Add(Interests.Republican);
         }
 
 
