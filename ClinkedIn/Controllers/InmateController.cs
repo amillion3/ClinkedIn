@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ClinkedIn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class InmateController : Controller
     {
         static List<Inmate> Inmates;
@@ -28,12 +28,28 @@ namespace ClinkedIn.Controllers
                 new Inmate {Id = 8, Name = "Austin Murphy", Conviction = "Convicted of one count of voter fraud for filling out absentee ballots for members of a nursing home.", Friends = new List<Inmate>(), Enemies = new List<Inmate>(), Interests = new List<Interests>(), Services = new Dictionary<string, double>()},
                 new Inmate {Id = 9, Name = "Michael Grimm", Conviction = "Pleaded guilty of felony tax evasion.", Friends = new List<Inmate>(), Enemies = new List<Inmate>(), Services = new Dictionary<string, double>()}
             };
+
+            Inmates[0].Services.Add("shivdisposal", 5.00);
         }
 
-        [HttpGet]
-        public ActionResult<List<Inmate>> GetAll()
+
+
+        [HttpGet("inmates")]
+        public ActionResult<List<Inmate>> GetAll([FromQuery] string service)
         {
-            return Inmates;
+            if (service != null)
+            {
+                return Inmates.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
+            }
+            //if (interest != null)
+            //{
+            //// return Inmates.Any(inmate => inmate.Interests.Contains(interest));
+        
+            else 
+            {
+                return Inmates;
+            }
+
         }
 
         [HttpGet("{id}")]
@@ -42,5 +58,12 @@ namespace ClinkedIn.Controllers
             var InmateById = Inmates.Where(inmate => inmate.Id == id);
             return Ok(InmateById);
         }
+
+        //[HttpGet("{service}")]
+        //public ActionResult<List<Inmate>> GetInmateByService(string service)
+        //{
+        //  //var InmateByService = Imates
+        //  //return Ok(InmateByService);
+        //}
     }
 }
