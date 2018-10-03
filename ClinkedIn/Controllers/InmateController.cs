@@ -25,7 +25,7 @@ namespace ClinkedIn.Controllers
                 new Inmate {Conviction = "Convicted of second-degree manslaughter for running a stop sign and killing a motorcyclist.", Interests = InterestModel.Gambling, Services = new ServiceModel(), Friends = new List<Inmate>, ID = 6, Name = "Bill Janklow"},
                 new Inmate {Conviction = "Sentenced to 37 months in prison on one charge of possession of child pornography.", Interests = InterestModel.Republican, Services = new ServiceModel(), Friends = new List<Inmate>, ID = 7, Name = "Wade Sanders"},
                 new Inmate {Conviction = "Convicted of one count of voter fraud for filling out absentee ballots for members of a nursing home.", Interests = InterestModel.Democrat, Services = new ServiceModel(), Friends = new List<Inmate>, ID = 8, Name = "Austin Murphy"},
-                new Inmate {Conviction = "Pleaded guilty of felony tax evasion.", Interests = InterestModel.Reading, Services = new ServiceModel(), Friends = new List<Inmate>, ID = 9, Name = "Michael Grimm"}
+                new Inmate {Conviction = "Pleaded guilty of felony tax evasion.", Interests = new InterestModel, Services = new Dictionary< >, Friends = new List<Inmate>, ID = 9, Name = "Michael Grimm"}
             }
         }
 
