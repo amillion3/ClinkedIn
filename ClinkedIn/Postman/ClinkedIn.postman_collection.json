@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "bd3283f4-9ce1-4dbb-bfad-ec8d2ee14c03",
+		"name": "ClinkedIn",
+		"description": "ClinkedIn - Rod Blagojevich edition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddInterestToInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://localhost:44388/api/inmate/5?interest=reading",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44388",
+					"path": [
+						"api",
+						"inmate",
+						"5"
+					],
+					"query": [
+						{
+							"key": "interest",
+							"value": "reading"
+						}
+					]
+				},
+				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
+			},
+			"response": []
+		}
+	]
+}

@@ -43,6 +43,7 @@ namespace ClinkedIn.Controllers
             return Ok(InmateById);
         }
 
+        // .../api/inmate/{id}?interest={interest}
         // .../api/inmate/5?interest=reading
         [HttpPut("{id}")]
         public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
@@ -53,12 +54,13 @@ namespace ClinkedIn.Controllers
             {
                 return NotFound();
             }
-            // if inmate's interest is a *new* interest
+            // Verify the input interest is not already an interest of the inmate
             else if (!InmateById.Interests.Contains(interest))
             {
-                InmateById.Interests.Append(interest);
+                InmateById.Interests.Add(interest);
+                Console.WriteLine(InmateById);
                 return Ok();
-            } 
+            }
             else
             {
                 return BadRequest();
