@@ -42,5 +42,27 @@ namespace ClinkedIn.Controllers
             var InmateById = Inmates.Where(inmate => inmate.Id == id);
             return Ok(InmateById);
         }
+
+        // .../api/inmate/5?interest=reading
+        [HttpPut("{id}")]
+        public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
+        {
+            var InmateById = Inmates.Find(inmate => inmate.Id == id);
+
+            if (InmateById == null)
+            {
+                return NotFound();
+            }
+            // if inmate's interest is a *new* interest
+            else if (!InmateById.Interests.Contains(interest))
+            {
+                InmateById.Interests.Append(interest);
+                return Ok();
+            } 
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }
