@@ -121,6 +121,6 @@ namespace ClinkedIn.Controllers
             }
         }
 
-        [HttpPut("")]
+        //[HttpPut("")]
     }
 }
