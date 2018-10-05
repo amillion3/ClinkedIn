@@ -75,18 +75,26 @@ namespace ClinkedIn.Controllers
         [HttpGet("inmates")]
         public ActionResult<List<Inmate>> GetAll([FromQuery] string service)
         {
-            if (service != null)
+            //var results = Inmates.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
+
+            var results = Inmates;
+            foreach (var r in results)
             {
-                return Inmates.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
+                _alcatraz.AddNewInmateInStorage(r);
             }
+            return Ok();
+            //if (service != null)
+            //{
+            //    //return _alcatraz.GetAllFromStorage.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
+            //}
             //if (interest != null)
             //{
             //// return Inmates.Any(inmate => inmate.Interests.Contains(interest));
         
-            else 
-            {
-                return Inmates;
-            }
+            //else 
+            //{
+            //    return Inmates;
+            //}
 
         }
 

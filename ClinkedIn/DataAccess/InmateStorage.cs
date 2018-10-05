@@ -15,7 +15,7 @@ namespace ClinkedIn.DataAccess
             new Inmate {Id = 2, Name = "Chaka Fattah", Conviction = "Convicted on 23 counts of racketeering, fraud, and other corruption charges.", Friends = new List<Inmate>(), Enemies = new List<Inmate>(), Interests = new List<Interests>(), Services = new Dictionary<string, double>()},
         };
 
-        public void Add(Inmate inmate)
+        public void AddNewInmateInStorage(Inmate inmate)
         {
             // does inmate have an id? if no, find the highest id and add 1
             // if not, set the id to 1 (IE, the very first inmate)
@@ -23,6 +23,7 @@ namespace ClinkedIn.DataAccess
                 _alcatraz.Max(i => i.Id) + 1
                 : 1;
             _alcatraz.Add(inmate);
+            Console.WriteLine(inmate);
         }
 
         public IEnumerable<Inmate> GetAllFromStorage()
