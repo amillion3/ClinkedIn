@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "bd3283f4-9ce1-4dbb-bfad-ec8d2ee14c03",
+		"name": "ClinkedIn",
+		"description": "ClinkedIn - Rod Blagojevich edition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddInterestToInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/5?interest=romance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"5"
+					],
+					"query": [
+						{
+							"key": "interest",
+							"value": "romance"
+						}
+					]
+				},
+				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:55969/api/inmate/inmates/2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates"
+					]
+				},
+				"description": "Gets a single inmate"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:55969/api/inmate/inmates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates"
+					]
+				},
+				"description": "gets all the inmates\nall the inmates?\nall the inmates."
+			},
+			"response": []
+		}
+	]
+}
