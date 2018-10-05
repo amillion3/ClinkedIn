@@ -71,16 +71,18 @@ namespace ClinkedIn.Controllers
 
 
         [HttpGet("inmates")]
-        public ActionResult<List<Inmate>> GetAll([FromQuery] string service)
+        public ActionResult<List<Inmate>> GetAll([FromQuery] string service, string interest)
         {
             if (service != null)
             {
                 return Inmates.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
             }
-            //if (interest != null)
-            //{
-            //// return Inmates.Any(inmate => inmate.Interests.Contains(interest));
-        
+            if (interest != null)
+            {
+                var searchInterest = (Interests)Enum.Parse(typeof(Interests), interest);
+                var inmates = Inmates.Where(inmate => inmate.Interests.Contains(searchInterest)).ToList<Inmate>();
+                return inmates;
+            }
             else 
             {
                 return Inmates;
@@ -118,5 +120,7 @@ namespace ClinkedIn.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut("")]
     }
 }
