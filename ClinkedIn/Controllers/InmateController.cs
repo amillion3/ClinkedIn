@@ -88,6 +88,21 @@ namespace ClinkedIn.Controllers
 
         }
 
+        [HttpGet("inmates/interests")]
+        public ActionResult<List<Inmate>> GetInmateByInterest([FromQuery]string interest)
+        {
+            var searchInterest = (Interests)Enum.Parse(typeof(Interests), interest);
+            if (interest != null)
+            {
+                var inmates = Inmates.Where(inmate => inmate.Interests.Contains(searchInterest)).ToList<Inmate>();
+                return inmates;
+            }
+            else
+            {
+                return Inmates;
+            }
+        }
+
         [HttpGet("inmates/{id}")]
         public ActionResult<List<Inmate>> GetInmateById(int id)
         {
