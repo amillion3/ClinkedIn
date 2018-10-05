@@ -106,6 +106,7 @@ namespace ClinkedIn.Controllers
       {
         return inmates.ToList();
       }
+<<<<<<< HEAD
     }
 
     [HttpPost]
@@ -115,6 +116,8 @@ namespace ClinkedIn.Controllers
       var userInmate = inmates.First(user => user.Id == id);
 
       userInmate.Friends.Add(inmate);
+=======
+>>>>>>> master
     }
   }
 }
