@@ -107,5 +107,14 @@ namespace ClinkedIn.Controllers
         return inmates.ToList();
       }
     }
-  }
+
+    [HttpGet("inmates/{id}")]
+    public ActionResult<List<Inmate>> GetInmateById(int id)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+        return Ok(InmateById);
+    }
+
+    }
 }
