@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.Models;
+using ClinkedIn.DataAccess.ClinkedIn.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+
 
 namespace ClinkedIn.Controllers
 {
@@ -117,6 +119,14 @@ namespace ClinkedIn.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        // storage
+        [HttpPost]
+        public void AddAnInmate(Inmate inmate)
+        {
+            var storage = new InmateStorage();
+            storage.Add(inmate);
         }
     }
 }
