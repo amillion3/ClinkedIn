@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.Models;
-using ClinkedIn.DataAccess.ClinkedIn.DataAccess;
+using ClinkedIn.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -122,11 +122,27 @@ namespace ClinkedIn.Controllers
         }
 
         // storage
+        // whaaat. i don't know what this does
+        private readonly InmateStorage _alcatraz;
+        public InmateController()
+        {
+            _alcatraz = new InmateStorage();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Inmate>> GetAll()
+        {
+            var storage = new InmateStorage();
+            var inmates = storage.GetAllFromStorage();
+            return Ok(inmates);
+            // inmates is from the InmateStorage, our 'temp database'
+        }
+
         [HttpPost]
         public void AddAnInmate(Inmate inmate)
         {
             var storage = new InmateStorage();
-            storage.Add(inmate);
+            storage.AddNewInmateInStorage(inmate);
         }
     }
 }
