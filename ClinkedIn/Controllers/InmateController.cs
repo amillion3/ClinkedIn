@@ -106,7 +106,6 @@ namespace ClinkedIn.Controllers
       {
         return inmates.ToList();
       }
-        
     }
   }
 }
