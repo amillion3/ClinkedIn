@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bd3283f4-9ce1-4dbb-bfad-ec8d2ee14c03",
+		"_postman_id": "90b3fddd-9628-42ec-bcdd-aaad1250a47b",
 		"name": "ClinkedIn",
 		"description": "ClinkedIn - Rod Blagojevich edition",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -11,7 +11,10 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:55969/api/inmate/inmates/5?interest=romance",
 					"protocol": "http",
@@ -37,7 +40,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:55969/api/inmate/inmates/2",
+			"name": "GetAll",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -63,12 +66,12 @@
 						"inmates"
 					]
 				},
-				"description": "Gets a single inmate"
+				"description": "Gets a list of all inmates"
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:55969/api/inmate/inmates",
+			"name": "GetInmateById",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -82,7 +85,31 @@
 					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates",
+					"raw": "http://localhost:55969/api/inmate/inmates/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"1"
+					]
+				},
+				"description": "Get an individual inmate by Id"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllInmatesByInterest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates?interest=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -92,9 +119,44 @@
 						"api",
 						"inmate",
 						"inmates"
+					],
+					"query": [
+						{
+							"key": "interest",
+							"value": "1"
+						}
 					]
 				},
-				"description": "gets all the inmates\nall the inmates?\nall the inmates."
+				"description": "Get all inmates that have an interest, for example: romance, or 1 "
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllInmatesByService",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates?service=Shiv%20disposal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates"
+					],
+					"query": [
+						{
+							"key": "service",
+							"value": "Shiv%20disposal"
+						}
+					]
+				},
+				"description": "Get all inmates that have a service, for example: Shive disposal"
 			},
 			"response": []
 		}
