@@ -1,46 +1,13 @@
 {
 	"info": {
-		"_postman_id": "90b3fddd-9628-42ec-bcdd-aaad1250a47b",
+		"_postman_id": "bd3283f4-9ce1-4dbb-bfad-ec8d2ee14c03",
 		"name": "ClinkedIn",
 		"description": "ClinkedIn - Rod Blagojevich edition",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "AddInterestToInmate",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates/5?interest=romance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "55969",
-					"path": [
-						"api",
-						"inmate",
-						"inmates",
-						"5"
-					],
-					"query": [
-						{
-							"key": "interest",
-							"value": "romance"
-						}
-					]
-				},
-				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
-			},
-			"response": []
-		},
-		{
-			"name": "GetAll",
+			"name": "GetInmateById",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -66,12 +33,12 @@
 						"inmates"
 					]
 				},
-				"description": "Gets a list of all inmates"
+				"description": "Gets a single inmate"
 			},
 			"response": []
 		},
 		{
-			"name": "GetInmateById",
+			"name": "GetAllInmates",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -85,7 +52,30 @@
 					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates/1",
+					"raw": "http://localhost:55969/api/inmate/inmates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates"
+					]
+				},
+				"description": "gets all the inmates\nall the inmates?\nall the inmates."
+			},
+			"response": []
+		},
+		{
+			"name": "AddInterestToInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/addinterest/1?interest=gambling",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -95,50 +85,28 @@
 						"api",
 						"inmate",
 						"inmates",
+						"addinterest",
 						"1"
-					]
-				},
-				"description": "Get an individual inmate by Id"
-			},
-			"response": []
-		},
-		{
-			"name": "GetAllInmatesByInterest",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates?interest=1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "55969",
-					"path": [
-						"api",
-						"inmate",
-						"inmates"
 					],
 					"query": [
 						{
 							"key": "interest",
-							"value": "1"
+							"value": "gambling"
 						}
 					]
 				},
-				"description": "Get all inmates that have an interest, for example: romance, or 1 "
+				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
 			},
 			"response": []
 		},
 		{
-			"name": "GetAllInmatesByService",
+			"name": "RemoveInterestFromInmate",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates?service=Shiv%20disposal",
+					"raw": "http://localhost:55969/api/inmate/inmates/removeinterest/1?interest=reading",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -147,16 +115,18 @@
 					"path": [
 						"api",
 						"inmate",
-						"inmates"
+						"inmates",
+						"removeinterest",
+						"1"
 					],
 					"query": [
 						{
-							"key": "service",
-							"value": "Shiv%20disposal"
+							"key": "interest",
+							"value": "reading"
 						}
 					]
 				},
-				"description": "Get all inmates that have a service, for example: Shive disposal"
+				"description": "Removes an interest from an individual inmate. Checks to make sure the inmate does have the interest already."
 			},
 			"response": []
 		}
