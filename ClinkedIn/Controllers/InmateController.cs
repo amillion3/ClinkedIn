@@ -64,29 +64,6 @@ namespace ClinkedIn.Controllers
       return Ok(InmateById);
     }
 
-    [HttpPut("inmates/{id}")]
-    public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
-    {
-      var inmates = _alcatraz.GetAllFromStorage();
-      var InmateById = inmates.Where(inmate => inmate.Id == id);
-
-      if (InmateById == null)
-      {
-        return NotFound();
-      }
-      //Verify the input interest is not already an interest of the inmate
-      else if (!InmateById.ElementAt(0).Interests.Contains(interest))
-      {
-        InmateById.ElementAt(0).Interests.Add(interest);
-        Console.WriteLine(InmateById);
-        return Ok();
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
     [HttpPut("inmates/AddAFriend/{id}/{friendId}")]
     public ActionResult AddAFriend(int id, int friendId)
     {
@@ -110,6 +87,94 @@ namespace ClinkedIn.Controllers
       }
     }
 
+    [HttpPut("inmates/addinterest/{id}")]
+    public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input interest is not already an interest of the inmate
+        else if (!InmateById.ElementAt(0).Interests.Contains(interest))
+        {
+            InmateById.ElementAt(0).Interests.Add(interest);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/removeinterest/{id}")]
+    public ActionResult RemoveInterestFromInmate(int id, [FromQuery]Interests interest)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input interest is already an interest of the inmate
+        else if (InmateById.ElementAt(0).Interests.Contains(interest))
+        {
+            InmateById.ElementAt(0).Interests.Remove(interest);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/addservice/{id}")]
+    public ActionResult AddServiceToInmate(int id, [FromQuery]string service, double cost)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input service is not already a service of the inmate
+        else if (!InmateById.ElementAt(0).Services.ContainsKey(service))
+        {
+            InmateById.ElementAt(0).Services.Add(service, cost);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/removeservice/{id}")]
+
+        public ActionResult RemoveServiceFromInmate(int id, [FromQuery]string service)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+            if (InmateById == null)
+            {
+                return NotFound();
+            }
+            //Verify the input service is already a service of the inmate
+            else if (InmateById.ElementAt(0).Services.ContainsKey(service))
+            {
+                InmateById.ElementAt(0).Services.Remove(service);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     [HttpPut("inmates/RemoveAFriend/{id}/{friendId}")]
     public ActionResult RemoveAFriend(int id, int friendId)
     {
