@@ -107,5 +107,49 @@ namespace ClinkedIn.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut("inmates/addservice/{id}")]
+        public ActionResult AddServiceToInmate(int id, [FromQuery]string service, double cost)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+            if (InmateById == null)
+            {
+                return NotFound();
+            }
+            //Verify the input service is not already a service of the inmate
+            else if (!InmateById.ElementAt(0).Services.ContainsKey(service))
+            {
+                InmateById.ElementAt(0).Services.Add(service, cost);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("inmates/removeservice/{id}")]
+        public ActionResult RemoveServiceFromInmate(int id, [FromQuery]string service)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+            if (InmateById == null)
+            {
+                return NotFound();
+            }
+            //Verify the input service is already a service of the inmate
+            else if (InmateById.ElementAt(0).Services.ContainsKey(service))
+            {
+                InmateById.ElementAt(0).Services.Remove(service);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }
