@@ -63,6 +63,7 @@ namespace ClinkedIn.Controllers
       var InmateById = inmates.Where(inmate => inmate.Id == id);
       return Ok(InmateById);
     }
+    
 
     [HttpPut("inmates/{id}")]
     public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
@@ -78,7 +79,6 @@ namespace ClinkedIn.Controllers
       else if (!InmateById.ElementAt(0).Interests.Contains(interest))
       {
         InmateById.ElementAt(0).Interests.Add(interest);
-        Console.WriteLine(InmateById);
         return Ok();
       }
       else
@@ -90,27 +90,48 @@ namespace ClinkedIn.Controllers
     [HttpPut("inmates/AddAFriend/{id}/{friendId}")]
     public ActionResult AddAFriend(int id, int friendId)
     {
-      var inmates = _alcatraz.GetAllFromStorage();
-      var userInmate = inmates.First(user => user.Id == id);
-      var desiredFriend = inmates.First(desired => desired.Id == friendId);
+            var inmates = _alcatraz.GetAllFromStorage();
+            var userInmate = inmates.First(user => user.Id == id);
+            var desiredFriend = inmates.First(desired => desired.Id == friendId);
 
-      if (userInmate == null)
-      {
-        return BadRequest();
-      }
-      else if (!userInmate.Friends.Contains(desiredFriend))
-      {
-        userInmate.Friends.Add(desiredFriend);
-        desiredFriend.Friends.Add(userInmate);
-        return Ok();
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
+            if (userInmate == null || id == friendId)
+            {
+                return BadRequest();
+            }
+            else if (!userInmate.Friends.Contains(desiredFriend))
+            {
+                _alcatraz.AddAFriendToInmate(userInmate.Id, desiredFriend.Id);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
-    [HttpPut("inmates/RemoveAFriend/{id}/{friendId}")]
+        [HttpPut("inmates/{id}/AddAFriend/")]
+        public ActionResult AddAFriendByInterest(int id, [FromQuery] string interest)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var userInmate = inmates.First(user => user.Id == id);
+            var searchInterest = (Interests)Enum.Parse(typeof(Interests), interest);
+            var interestingInmates = inmates.Where(inmate => inmate.Interests.Contains(searchInterest)).ToList<Inmate>();
+
+            foreach (var inmate in interestingInmates)
+            {
+                if (userInmate == null)
+                {
+                    return BadRequest();
+                }
+                else if (!userInmate.Friends.Contains(inmate))
+                {
+                    _alcatraz.AddAFriendToInmate(userInmate.Id, inmate.Id);
+                }
+            }
+            return Ok();
+        }
+
+        [HttpPut("inmates/RemoveAFriend/{id}/{friendId}")]
     public ActionResult RemoveAFriend(int id, int friendId)
     {
       var inmates = _alcatraz.GetAllFromStorage();

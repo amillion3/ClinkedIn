@@ -116,5 +116,25 @@ namespace ClinkedIn.DataAccess
             // Find the first matching id from _alcatraz
             return _alcatraz.First(i => i.Id == id);
         }
+
+        public void AddFriendsByInterest(int id, List<Inmate> inmates)
+        {
+            var userInmate = inmates.First(user => user.Id == id);
+
+            foreach (var inmate in inmates)
+            {
+                AddAFriendToInmate(userInmate.Id, inmate.Id);
+            }
+        }
+
+        public void AddAFriendToInmate(int id, int friendId)
+        {
+            var inmates = GetAllFromStorage();
+            var userInmate = inmates.First(user => user.Id == id);
+            var desiredFriend = inmates.First(desired => desired.Id == friendId);
+
+            userInmate.Friends.Add(desiredFriend);
+        }
     }
+    
 }
