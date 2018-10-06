@@ -100,6 +100,41 @@
 			"response": []
 		},
 		{
+			"name": "AddServiceToInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/addservice/1?service=writing&cost=4.00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"addservice",
+						"1"
+					],
+					"query": [
+						{
+							"key": "service",
+							"value": "writing"
+						},
+						{
+							"key": "cost",
+							"value": "4.00"
+						}
+					]
+				},
+				"description": "Adds a new service to an individual inmate. Checks to make sure the inmate does not have the service already."
+			},
+			"response": []
+		},
+		{
 			"name": "RemoveInterestFromInmate",
 			"request": {
 				"method": "PUT",
@@ -127,6 +162,37 @@
 					]
 				},
 				"description": "Removes an interest from an individual inmate. Checks to make sure the inmate does have the interest already."
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveServiceFromInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/removeservice/2?service=Laundry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"removeservice",
+						"2"
+					],
+					"query": [
+						{
+							"key": "service",
+							"value": "Laundry"
+						}
+					]
+				},
+				"description": "Adds a new service to an individual inmate. Checks to make sure the inmate does not have the service already."
 			},
 			"response": []
 		}
