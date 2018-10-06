@@ -64,7 +64,7 @@ namespace ClinkedIn.Controllers
             return Ok(InmateById);
         }
 
-        [HttpPut("inmates/{id}")]
+        [HttpPut("inmates/addinterest/{id}")]
         public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
         {
             var inmates = _alcatraz.GetAllFromStorage();
@@ -78,7 +78,28 @@ namespace ClinkedIn.Controllers
             else if (!InmateById.ElementAt(0).Interests.Contains(interest))
             {
                 InmateById.ElementAt(0).Interests.Add(interest);
-                Console.WriteLine(InmateById);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("inmates/removeinterest/{id}")]
+        public ActionResult RemoveInterestFromInmate(int id, [FromQuery]Interests interest)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+            if (InmateById == null)
+            {
+                return NotFound();
+            }
+            //Verify the input interest is already an interest of the inmate
+            else if (InmateById.ElementAt(0).Interests.Contains(interest))
+            {
+                InmateById.ElementAt(0).Interests.Remove(interest);
                 return Ok();
             }
             else
