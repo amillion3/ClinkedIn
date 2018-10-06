@@ -106,18 +106,22 @@ namespace ClinkedIn.Controllers
       {
         return inmates.ToList();
       }
-<<<<<<< HEAD
+
     }
 
-    [HttpPost]
-    public void AddAFriend(int id, Inmate inmate)
+    [HttpPost()]
+    public void AddAFriend(int id, int friendId)
     {
       var inmates = _alcatraz.GetAllFromStorage();
       var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
 
-      userInmate.Friends.Add(inmate);
-=======
->>>>>>> master
+      if (!userInmate.Friends.Contains(desiredFriend) && !desiredFriend.Friends.Contains(userInmate))
+      {
+        userInmate.Friends.Add(desiredFriend);
+        desiredFriend.Friends.Add(userInmate);
+      }
+
     }
   }
 }
