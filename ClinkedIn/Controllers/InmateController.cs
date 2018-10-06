@@ -98,7 +98,7 @@ namespace ClinkedIn.Controllers
       {
         return BadRequest();
       }
-      else if (!userInmate.Friends.Contains(desiredFriend) && !desiredFriend.Friends.Contains(userInmate))
+      else if (!userInmate.Friends.Contains(desiredFriend))
       {
         userInmate.Friends.Add(desiredFriend);
         desiredFriend.Friends.Add(userInmate);
@@ -121,7 +121,7 @@ namespace ClinkedIn.Controllers
       {
         return BadRequest();
       }
-      else if (userInmate.Friends.Contains(desiredFriend) && desiredFriend.Friends.Contains(userInmate))
+      else if (userInmate.Friends.Contains(desiredFriend))
       {
         userInmate.Friends.Remove(desiredFriend);
         desiredFriend.Friends.Remove(userInmate);
