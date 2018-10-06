@@ -95,6 +95,16 @@ namespace ClinkedIn.DataAccess
             }
         };
 
+        static List<Warden> _wardens = new List<Warden>()
+        {
+          new Warden
+          {
+            Id = 1,
+            Name = "Mister Sir",
+            Inmates = new List<Inmate>()
+          }
+        };
+
         public void AddNewInmateInStorage(Inmate inmate)
         {
             // does inmate have an id? if no, find the highest id and add 1
@@ -109,6 +119,11 @@ namespace ClinkedIn.DataAccess
         public IEnumerable<Inmate> GetAllFromStorage()
         {
             return _alcatraz;
+        }
+
+        public Warden GetWardenById(int id)
+        {
+            return _wardens.First(i => i.Id == id);
         }
 
         public Inmate GetById(int id)

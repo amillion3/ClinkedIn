@@ -64,21 +64,21 @@ namespace ClinkedIn.Controllers
       return Ok(InmateById);
     }
     
-
-    [HttpPut("inmates/{id}")]
-    public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
+    [HttpPut("inmates/AddAFriend/{id}/{friendId}")]
+    public ActionResult AddAFriend(int id, int friendId)
     {
       var inmates = _alcatraz.GetAllFromStorage();
-      var InmateById = inmates.Where(inmate => inmate.Id == id);
+      var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
 
-      if (InmateById == null)
+      if (userInmate == null)
       {
-        return NotFound();
+        return BadRequest();
       }
-      //Verify the input interest is not already an interest of the inmate
-      else if (!InmateById.ElementAt(0).Interests.Contains(interest))
+      else if (!userInmate.Friends.Contains(desiredFriend))
       {
-        InmateById.ElementAt(0).Interests.Add(interest);
+        userInmate.Friends.Add(desiredFriend);
+        desiredFriend.Friends.Add(userInmate);
         return Ok();
       }
       else
@@ -87,20 +87,109 @@ namespace ClinkedIn.Controllers
       }
     }
 
-    [HttpPut("inmates/AddAFriend/{id}/{friendId}")]
-    public ActionResult AddAFriend(int id, int friendId)
+    [HttpPut("inmates/AddAEnemy/{id}/{friendId}")]
+    public ActionResult AddAEnemy(int id, int friendId)
     {
-            var inmates = _alcatraz.GetAllFromStorage();
-            var userInmate = inmates.First(user => user.Id == id);
-            var desiredFriend = inmates.First(desired => desired.Id == friendId);
+      var inmates = _alcatraz.GetAllFromStorage();
+      var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
 
-            if (userInmate == null || id == friendId)
+      if (userInmate == null)
+      {
+        return BadRequest();
+      }
+      else if (!userInmate.Enemies.Contains(desiredFriend))
+      {
+        userInmate.Enemies.Add(desiredFriend);
+        return Ok();
+      }
+      else
+      {
+        return BadRequest();
+      }
+    }
+
+    [HttpPut("inmates/addinterest/{id}")]
+    public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input interest is not already an interest of the inmate
+        else if (!InmateById.ElementAt(0).Interests.Contains(interest))
+        {
+            InmateById.ElementAt(0).Interests.Add(interest);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/removeinterest/{id}")]
+    public ActionResult RemoveInterestFromInmate(int id, [FromQuery]Interests interest)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input interest is already an interest of the inmate
+        else if (InmateById.ElementAt(0).Interests.Contains(interest))
+        {
+            InmateById.ElementAt(0).Interests.Remove(interest);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/addservice/{id}")]
+    public ActionResult AddServiceToInmate(int id, [FromQuery]string service, double cost)
+    {
+        var inmates = _alcatraz.GetAllFromStorage();
+        var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+        if (InmateById == null)
+        {
+            return NotFound();
+        }
+        //Verify the input service is not already a service of the inmate
+        else if (!InmateById.ElementAt(0).Services.ContainsKey(service))
+        {
+            InmateById.ElementAt(0).Services.Add(service, cost);
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpPut("inmates/removeservice/{id}")]
+
+        public ActionResult RemoveServiceFromInmate(int id, [FromQuery]string service)
+        {
+            var inmates = _alcatraz.GetAllFromStorage();
+            var InmateById = inmates.Where(inmate => inmate.Id == id);
+
+            if (InmateById == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-            else if (!userInmate.Friends.Contains(desiredFriend))
+            //Verify the input service is already a service of the inmate
+            else if (InmateById.ElementAt(0).Services.ContainsKey(service))
             {
-                _alcatraz.AddAFriendToInmate(userInmate.Id, desiredFriend.Id);
+                InmateById.ElementAt(0).Services.Remove(service);
                 return Ok();
             }
             else
@@ -146,6 +235,28 @@ namespace ClinkedIn.Controllers
       {
         userInmate.Friends.Remove(desiredFriend);
         desiredFriend.Friends.Remove(userInmate);
+        return Ok();
+      }
+      else
+      {
+        return BadRequest();
+      }
+    }
+
+    [HttpPut("inmates/RemoveAEnemy/{id}/{friendId}")]
+    public ActionResult RemoveAEnemy(int id, int friendId)
+    {
+      var inmates = _alcatraz.GetAllFromStorage();
+      var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
+
+      if (userInmate == null)
+      {
+        return BadRequest();
+      }
+      else if (userInmate.Enemies.Contains(desiredFriend))
+      {
+        userInmate.Enemies.Remove(desiredFriend);
         return Ok();
       }
       else

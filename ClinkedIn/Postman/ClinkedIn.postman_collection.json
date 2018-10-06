@@ -1,46 +1,13 @@
 {
 	"info": {
-		"_postman_id": "90b3fddd-9628-42ec-bcdd-aaad1250a47b",
+		"_postman_id": "bd3283f4-9ce1-4dbb-bfad-ec8d2ee14c03",
 		"name": "ClinkedIn",
 		"description": "ClinkedIn - Rod Blagojevich edition",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "AddInterestToInmate",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates/5?interest=romance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "55969",
-					"path": [
-						"api",
-						"inmate",
-						"inmates",
-						"5"
-					],
-					"query": [
-						{
-							"key": "interest",
-							"value": "romance"
-						}
-					]
-				},
-				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
-			},
-			"response": []
-		},
-		{
-			"name": "GetAll",
+			"name": "GetInmateById",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -66,12 +33,12 @@
 						"inmates"
 					]
 				},
-				"description": "Gets a list of all inmates"
+				"description": "Gets a single inmate"
 			},
 			"response": []
 		},
 		{
-			"name": "GetInmateById",
+			"name": "GetAllInmates",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -85,7 +52,7 @@
 					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates/1",
+					"raw": "http://localhost:55969/api/inmate/inmates",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -94,20 +61,64 @@
 					"path": [
 						"api",
 						"inmate",
-						"inmates",
-						"1"
+						"inmates"
 					]
 				},
-				"description": "Get an individual inmate by Id"
+				"description": "gets all the inmates\nall the inmates?\nall the inmates."
 			},
 			"response": []
 		},
 		{
-			"name": "GetAllInmatesByInterest",
+			"name": "GetAllInmates Service",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates?service=Enforcer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates"
+					],
+					"query": [
+						{
+							"key": "service",
+							"value": "Enforcer"
+						}
+					]
+				},
+				"description": "gets all the inmates\nall the inmates?\nall the inmates."
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllInmates Interests",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
 				"url": {
 					"raw": "http://localhost:55969/api/inmate/inmates?interest=1",
 					"protocol": "http",
@@ -127,18 +138,18 @@
 						}
 					]
 				},
-				"description": "Get all inmates that have an interest, for example: romance, or 1 "
+				"description": "gets all the inmates\nall the inmates?\nall the inmates."
 			},
 			"response": []
 		},
 		{
-			"name": "GetAllInmatesByService",
+			"name": "AddInterestToInmate",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:55969/api/inmate/inmates?service=Shiv%20disposal",
+					"raw": "http://localhost:55969/api/inmate/inmates/addinterest/1?interest=gambling",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -147,16 +158,231 @@
 					"path": [
 						"api",
 						"inmate",
-						"inmates"
+						"inmates",
+						"addinterest",
+						"1"
+					],
+					"query": [
+						{
+							"key": "interest",
+							"value": "gambling"
+						}
+					]
+				},
+				"description": "Adds a new interest to an individual inmate. Checks to make sure the inmate does not have the interest already."
+			},
+			"response": []
+		},
+		{
+			"name": "AddServiceToInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/addservice/1?service=writing&cost=4.00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"addservice",
+						"1"
 					],
 					"query": [
 						{
 							"key": "service",
-							"value": "Shiv%20disposal"
+							"value": "writing"
+						},
+						{
+							"key": "cost",
+							"value": "4.00"
 						}
 					]
 				},
-				"description": "Get all inmates that have a service, for example: Shive disposal"
+				"description": "Adds a new service to an individual inmate. Checks to make sure the inmate does not have the service already."
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveInterestFromInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/removeinterest/1?interest=reading",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"removeinterest",
+						"1"
+					],
+					"query": [
+						{
+							"key": "interest",
+							"value": "reading"
+						}
+					]
+				},
+				"description": "Removes an interest from an individual inmate. Checks to make sure the inmate does have the interest already."
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveServiceFromInmate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/removeservice/2?service=Laundry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"removeservice",
+						"2"
+					],
+					"query": [
+						{
+							"key": "service",
+							"value": "Laundry"
+						}
+					]
+				},
+				"description": "Adds a new service to an individual inmate. Checks to make sure the inmate does not have the service already."
+			},
+			"response": []
+		},
+		{
+			"name": "AddAFriend",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/AddAFriend/1/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"AddAFriend",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveAFriend",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/RemoveAFriend/1/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"RemoveAFriend",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddAEnemy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/AddAEnemy/1/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"AddAEnemy",
+						"1",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveAnEnemy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"STEVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:55969/api/inmate/inmates/RemoveAEnemy/1/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55969",
+					"path": [
+						"api",
+						"inmate",
+						"inmates",
+						"RemoveAEnemy",
+						"1",
+						"4"
+					]
+				}
 			},
 			"response": []
 		}
