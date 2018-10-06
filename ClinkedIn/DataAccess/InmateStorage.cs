@@ -116,26 +116,5 @@ namespace ClinkedIn.DataAccess
             // Find the first matching id from _alcatraz
             return _alcatraz.First(i => i.Id == id);
         }
-
-        //public List<Inmate>GetAll([FromQuery] string service, string interest)
-        //{
-        //    // not sure what is working/broken
-        //    if (service != null)
-        //    {
-        //        return _alcatraz.Where(inmate => inmate.Services.ContainsKey(service)).ToList();
-        //    }
-        //    if (interest != null)
-        //    {
-        //        var searchInterest = (Interests)Enum.Parse(typeof(Interests), interest);
-        //        var inmates = _alcatraz.Where(inmate => inmate.Interests.Contains(searchInterest)).ToList<Inmate>();
-        //        return inmates;
-        //    }
-        //    else 
-        //    {
-        //        return _alcatraz;
-        //    }
-        //}
-
-        
     }
 }
