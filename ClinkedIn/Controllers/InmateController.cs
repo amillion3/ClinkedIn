@@ -87,6 +87,28 @@ namespace ClinkedIn.Controllers
       }
     }
 
+    [HttpPut("inmates/AddAEnemy/{id}/{friendId}")]
+    public ActionResult AddAEnemy(int id, int friendId)
+    {
+      var inmates = _alcatraz.GetAllFromStorage();
+      var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
+
+      if (userInmate == null)
+      {
+        return BadRequest();
+      }
+      else if (!userInmate.Enemies.Contains(desiredFriend))
+      {
+        userInmate.Enemies.Add(desiredFriend);
+        return Ok();
+      }
+      else
+      {
+        return BadRequest();
+      }
+    }
+
     [HttpPut("inmates/addinterest/{id}")]
     public ActionResult AddInterestToInmate(int id, [FromQuery]Interests interest)
     {
@@ -175,6 +197,7 @@ namespace ClinkedIn.Controllers
                 return BadRequest();
             }
         }
+
     [HttpPut("inmates/RemoveAFriend/{id}/{friendId}")]
     public ActionResult RemoveAFriend(int id, int friendId)
     {
@@ -190,6 +213,28 @@ namespace ClinkedIn.Controllers
       {
         userInmate.Friends.Remove(desiredFriend);
         desiredFriend.Friends.Remove(userInmate);
+        return Ok();
+      }
+      else
+      {
+        return BadRequest();
+      }
+    }
+
+    [HttpPut("inmates/RemoveAEnemy/{id}/{friendId}")]
+    public ActionResult RemoveAEnemy(int id, int friendId)
+    {
+      var inmates = _alcatraz.GetAllFromStorage();
+      var userInmate = inmates.First(user => user.Id == id);
+      var desiredFriend = inmates.First(desired => desired.Id == friendId);
+
+      if (userInmate == null)
+      {
+        return BadRequest();
+      }
+      else if (userInmate.Enemies.Contains(desiredFriend))
+      {
+        userInmate.Enemies.Remove(desiredFriend);
         return Ok();
       }
       else
